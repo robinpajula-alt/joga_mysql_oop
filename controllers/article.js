@@ -61,6 +61,15 @@ class articleController {
             article: { id: Number(id), ...updatedData }
         })
     }
+
+    async deleteArticle(req, res) {
+        const id = req.params.id
+        const affectedRows = await articleModel.delete(id)
+        if (affectedRows === 0) {
+            return res.status(404).json({ message: 'Article not found' })
+        }
+        res.status(200).json({ message: `deleted article with id ${id}` })
+    }
 }
 
 module.exports = articleController
