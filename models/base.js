@@ -58,6 +58,12 @@ class BaseSQLModel {
     const results = await this.executeQuery(query, [where, value])
     return results
   }
+
+  async create(data) {
+    const query = `INSERT INTO ${this.tableName} SET ?`
+    const result = await this.executeQuery(query, data)
+    return result.insertId
+  }
 }
 
 module.exports = BaseSQLModel
